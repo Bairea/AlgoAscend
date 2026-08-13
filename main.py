@@ -1,5 +1,5 @@
 def main():
-    print("Hello from algoscend!")
+    print("Hello from algoascend!")
 
 
 if __name__ == "__main__":

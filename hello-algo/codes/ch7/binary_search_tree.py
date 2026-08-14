@@ -23,7 +23,7 @@ class BinarySearchTree:
             if cur.val < num:
                 cur = cur.right
             elif cur.val > num:
-                cur.left
+                cur = cur.left
             else:
                 break
 
@@ -57,6 +57,7 @@ class BinarySearchTree:
         if self._root is None:
             return
         cur, pre = self._root, None
+        # 找相等的就break，没找到就是None
         while cur is not None:
             if cur.val == num:
                 break
@@ -66,9 +67,11 @@ class BinarySearchTree:
             else:
                 cur = cur.left
 
+        # cur是None，没找到就结束
         if cur is None:
             return
 
+        # 找子节点(可能为None)，直接把子节点交给父节点
         if cur.left is None or cur.right is None:
             child = cur.left or cur.right
             if cur != self._root:
@@ -79,6 +82,7 @@ class BinarySearchTree:
             else:
                 self._root = child
         else:
+            # 度为2，即有两个子节点，找右子树的最小的节点(一直左走)
             tmp: TreeNode = cur.right
             while tmp.left is not None:
                 tmp = tmp.left

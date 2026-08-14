@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class TreeNode:
     def __init__(self, val: int):
         self.val: int = val
@@ -88,6 +91,27 @@ class BinarySearchTree:
                 tmp = tmp.left
             self.remove(tmp.val)
             cur.val = tmp.val
+
+
+def print_tree(root: TreeNode | None):
+    """层序遍历打印二叉树(空节点用 None 占位)"""
+    if root is None:
+        print("空树")
+        return
+    res = []
+    queue = deque([root])
+    while queue:
+        node = queue.popleft()
+        if node is None:
+            res.append(None)
+        else:
+            res.append(node.val)
+            queue.append(node.left)
+            queue.append(node.right)
+    # 去掉末尾的 None,使输出更简洁
+    while res and res[-1] is None:
+        res.pop()
+    print(res)
 
 
 """Driver Code"""
